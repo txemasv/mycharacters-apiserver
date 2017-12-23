@@ -2,24 +2,40 @@ package org.txemasv.mycharacters.apiserver.model;
 
 public class MyResource {
 	
-	private String name;
-	private String value;
+	private String resource;
+	private String verb;
+	private String path;
 	
-	public MyResource(String name, String value) {
-		this.name = name;
-		this.value = value;
+	public MyResource(String resource, String verb, String path) {
+		this.resource = resource;
+		this.verb = verb;
+		this.path = path;
 	}
-	public String getName() {
-		return name;
+
+	public String getResource() {
+		return resource;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
-	public String getValue() {
-		return value;
+
+	public String getVerb() {
+		return verb;
 	}
-	public void setValue(String value) {
-		this.value = value;
+
+	public void setVerb(String verb) {
+		this.verb = verb;
 	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	
 
 }
