@@ -1,5 +1,7 @@
 package org.txemasv.mycharacters.apiserver.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class Character {
@@ -10,6 +12,8 @@ public class Character {
 	private String firstName;
 	private String lastName;
 	private String description;
+	
+	private List<Movie> movies;
 
 	private Character() {}
 
@@ -51,4 +55,11 @@ public class Character {
 		this.description = description;
 	}
 
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
+	}
 }
