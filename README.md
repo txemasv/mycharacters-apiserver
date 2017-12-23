@@ -1,3 +1,3 @@
-# mycharacters-apiserver
-
-Example REST App / Web Json feed create with Spring and MongoDb.
+## Description
+**Spring/MongoDB Rest example**.  
+Basic example to create an REST/ JSON App with Spring and MongoDb.
