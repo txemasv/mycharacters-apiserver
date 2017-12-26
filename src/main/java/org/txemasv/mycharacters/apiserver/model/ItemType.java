@@ -4,20 +4,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
-public class Item {
+public class ItemType {
 	
 	private String description;
 	private String verb;
 	private String path;
+	private String params;
 	
-	public Item(String verb, String path, String description) {
+	public ItemType(String verb, String path, String description, String params) {
 		this.verb = verb;
 		this.path = path;
 		this.description = description;
-	}
-	
-	public Item(String description) {
-		this.description = description;
+		this.params = params;
 	}
 
 	public String getDescription() {
@@ -43,5 +41,14 @@ public class Item {
 	public void setPath(String path) {
 		this.path = path;
 	}
+
+	public String getParams() {
+		return params;
+	}
+
+	public void setParams(String params) {
+		this.params = params;
+	}
+	
 
 }

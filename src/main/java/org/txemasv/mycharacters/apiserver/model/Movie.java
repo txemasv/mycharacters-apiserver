@@ -15,7 +15,7 @@ public class Movie {
 	private String year;
 	private String description;
 
-	private Movie() {}
+	public Movie() {}
 
 	public Movie(String code, String title, String year, String description) {
 		this.code = code;

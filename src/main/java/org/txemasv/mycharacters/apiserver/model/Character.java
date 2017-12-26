@@ -19,7 +19,7 @@ public class Character {
 	
 	private List<Movie> movies;
 	
-	private Character() {}
+	public Character() {}
 
 	public Character(String firstName, String lastName, String description) {
 		this.firstName = firstName;
