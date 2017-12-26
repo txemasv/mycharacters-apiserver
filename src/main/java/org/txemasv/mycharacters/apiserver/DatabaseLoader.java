@@ -1,4 +1,4 @@
-package org.txemasv.mycharacters.apiserver.model;
+package org.txemasv.mycharacters.apiserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
 import org.springframework.stereotype.Component;
+import org.txemasv.mycharacters.apiserver.model.Character;
+import org.txemasv.mycharacters.apiserver.model.CharacterRepository;
+import org.txemasv.mycharacters.apiserver.model.Movie;
 
 
 @Component
@@ -45,6 +48,7 @@ public class DatabaseLoader implements CommandLineRunner {
 		movies.add(new Movie("IT000017-002", "It", "2017", "New version of Steephen king horor story"));
 		character.setMovies(movies);
 		repository.save(character);
+		
 	}
 
 }

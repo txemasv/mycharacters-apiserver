@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class Character {
 
 	@Id
@@ -14,13 +18,27 @@ public class Character {
 	private String description;
 	
 	private List<Movie> movies;
-
+	
 	private Character() {}
 
 	public Character(String firstName, String lastName, String description) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
+	}
+	
+	public Character(String firstName, String lastName, String description, List<Movie> movies) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.description = description;
+		this.movies = movies;
+	}
+	
+	public void setFields(Character c) {
+		this.firstName = c.getFirstName();
+		this.lastName = c.getLastName();
+		this.description = c.getDescription();
+		this.movies = c.getMovies();
 	}
 
 	public String getId() {
