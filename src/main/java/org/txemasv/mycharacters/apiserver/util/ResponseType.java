@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.txemasv.mycharacters.apiserver.model.Character;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class ResponseType {
 
 	private long count;
@@ -11,7 +14,10 @@ public class ResponseType {
 	private long page;
 	private String next;
 	private String previous;
+	
+	@JsonInclude(Include.NON_NULL)
 	private String info;
+	
 	private List<Character> characters;
 	
 	public ResponseType() {}

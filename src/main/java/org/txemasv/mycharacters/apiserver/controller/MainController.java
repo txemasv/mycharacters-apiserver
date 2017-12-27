@@ -52,13 +52,17 @@ public class MainController {
 		items.add(new ItemType("GET", "/characters/:id/movies/:code", "get one movie from one character", "[]"));
 
 		// POST
-		items.add(new ItemType("POST", "/characters", "create one character", "[]"));
+		items.add(new ItemType("POST", "/characters", "Create one character", "[]"));
 
 		// PUT
-		items.add(new ItemType("PUT", "/characters/:id", "update one character (createIfNotExists not allowed)", "[]"));
+		items.add(new ItemType("PUT", "/characters/:id", "Update one character (createIfNotExists not allowed)", "[]"));
 
 		// DELETE
-		items.add(new ItemType("DELETE", "/characters/:id", "delete one character", "[]"));
+		items.add(new ItemType("DELETE", "/characters/:id", "Delete one character", "[]"));
+
+		// HTTP
+		items.add(new ItemType(null, null, "Response Codes",
+				"[200: 0K, 201: CREATED, 204: NO_CONTENT, 400: BAD_REQUEST, 404: NOT_FOUND]"));
 
 		return new ResponseEntity<>(items, HttpStatus.OK);
 	}
@@ -99,6 +103,14 @@ public class MainController {
 		response.setPage(charactersPage.getNumber());
 		response.setCharacters(charactersPage.getContent());
 
+		if ((page + 1) * limit < response.getCount()) {
+			response.setNext("page=" + (page + 1));
+		}
+
+		if (response.getCount() > (page - 1) * limit && page > 0) {
+			response.setPrevious("page=" + (page - 1));
+		}
+
 		// TODO:filter (firstName, lastName, description)
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -128,7 +140,7 @@ public class MainController {
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().build().toUri());
 			return new ResponseEntity<>(new SuccessType("character created"), httpHeaders, HttpStatus.CREATED);
-			
+
 		} catch (ConstraintViolationException e) {
 			return new ResponseEntity<>(new ErrorType("id can't be null"), HttpStatus.BAD_REQUEST);
 		}
@@ -151,7 +163,7 @@ public class MainController {
 			return new ResponseEntity<>(new ErrorType("id can't be null"), HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>(new SuccessType("character updated"), HttpStatus.OK);
+		return new ResponseEntity<>(new SuccessType("character updated"), HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping("/characters/{id}")
@@ -171,7 +183,7 @@ public class MainController {
 			return new ResponseEntity<>(new ErrorType("id can't be null"), HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>(new SuccessType("character deleted"), HttpStatus.OK);
+		return new ResponseEntity<>(new SuccessType("character deleted"), HttpStatus.NO_CONTENT);
 	}
 
 	// TODO: DELETE characters -> delete all characters
