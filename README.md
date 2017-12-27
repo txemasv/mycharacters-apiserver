@@ -14,9 +14,9 @@ Basic example to create an REST/ JSON API with Spring and MongoDb.
 
 4) Execute command: **mvnw package && java -jar target/mycharacters-api-server-0.1.0.jar**. (This download all dependencies with maven, execute the test and launch the application in an embedded HTTP server).
 
-5) Open a browser and go to localhost:8080/. If everything was ok, you can see a list of functions of the API Rest.
+5) Open a browser and go to **localhost:8080/**. If everything was ok, you can see a list of functions of the API Rest.
 
 6) You can use curl via CLI to communicate with the application (GET, POST, PUT, DELETE).
 
-- Possible connection issues: Verify in application.properties file the ports of mongodb and the embedded server are the same that you are using. By default they are mongodb=27017, server=8080.
+- Possible connection issues: Verify in application.properties file the ports of mongodb and the embedded server are the same that you are using. By default they are **mongodb=27017**, **server=8080**.
 
