@@ -12,7 +12,7 @@ Basic example to create an REST/ JSON API with Spring and MongoDb.
 
 3) Open a CLI and go to the root directory of the project (where the pom.xml exists).
 
-4) Execute command: mvnw package && java -jar target/mycharacters-api-server-0.1.0.jar. (This download all dependencies with maven, execute the test and launch the application in an embedded HTTP server).
+4) Execute command: **mvnw package && java -jar target/mycharacters-api-server-0.1.0.jar**. (This download all dependencies with maven, execute the test and launch the application in an embedded HTTP server).
 
 5) Open a browser and go to localhost:8080/. If everything was ok, you can see a list of functions of the API Rest.
 
