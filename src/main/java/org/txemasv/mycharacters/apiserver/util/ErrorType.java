@@ -1,20 +1,20 @@
-package org.txemasv.mycharacters.apiserver.model;
+package org.txemasv.mycharacters.apiserver.util;
 
 
 public class ErrorType {
 	
-	private String errorMessage;
+	private String error;
 
 	public ErrorType(String errorMessage) {
-		this.errorMessage = errorMessage;
+		this.error = errorMessage;
 	}
 	
 	public String getErrorMessage() {
-		return errorMessage;
+		return error;
 	}
 
 	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
+		this.error = errorMessage;
 	}
 
 }

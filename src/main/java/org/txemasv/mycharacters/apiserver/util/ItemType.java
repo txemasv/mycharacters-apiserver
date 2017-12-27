@@ -1,4 +1,4 @@
-package org.txemasv.mycharacters.apiserver.model;
+package org.txemasv.mycharacters.apiserver.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -49,6 +49,5 @@ public class ItemType {
 	public void setParams(String params) {
 		this.params = params;
 	}
-	
 
 }

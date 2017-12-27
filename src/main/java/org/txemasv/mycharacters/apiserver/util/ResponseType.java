@@ -1,6 +1,8 @@
-package org.txemasv.mycharacters.apiserver.model;
+package org.txemasv.mycharacters.apiserver.util;
 
 import java.util.List;
+
+import org.txemasv.mycharacters.apiserver.model.Character;
 
 public class ResponseType {
 
@@ -9,16 +11,18 @@ public class ResponseType {
 	private long page;
 	private String next;
 	private String previous;
+	private String info;
 	private List<Character> characters;
 	
 	public ResponseType() {}
 	
-	public ResponseType(long count, long limit, long page, String next, String previous, List<Character> characters) {
+	public ResponseType(long count, long limit, long page, String next, String previous, String info, List<Character> characters) {
 		this.count = count;
 		this.limit = limit;
 		this.page = page;
 		this.next = next;
 		this.previous = previous;
+		this.info = info;
 		this.characters = characters;
 	}
 
@@ -69,5 +73,15 @@ public class ResponseType {
 	public void setCharacters(List<Character> characters) {
 		this.characters = characters;
 	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	
 	
 }

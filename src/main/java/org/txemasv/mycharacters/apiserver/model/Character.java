@@ -2,6 +2,8 @@ package org.txemasv.mycharacters.apiserver.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,7 +15,9 @@ public class Character {
 	@Id
 	private String id;
 	
+	@NotNull
 	private String firstName;
+	
 	private String lastName;
 	private String description;
 	
