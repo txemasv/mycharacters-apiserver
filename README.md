@@ -8,7 +8,7 @@ Basic example to create an REST/ JSON API with Spring and MongoDb.
 
 1) You need MongoDb installed in your machine. (You can find the installer in https://www.mongodb.com/download-center#community. The Community Version is free. Download and install the correct version for you OS).
 
-2) Open a CLI and execute the mongod service. (Example in Windows: C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe or add the path C:\Program Files\MongoDB\Server\3.6\bin to the environment variables).
+2) Open a CLI and execute the mongod service. (Example in Windows: C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe or add the path C:\Program Files\MongoDB\Server\3.6\bin to the environment variables and execute mongod).
 
 3) Open a CLI and go to the root directory of the project (where the pom.xml exists).
 
