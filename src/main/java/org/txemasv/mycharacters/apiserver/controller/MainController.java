@@ -69,10 +69,10 @@ public class MainController {
 		return new ResponseEntity<>(items, HttpStatus.OK);
 	}
 
-	@GetMapping("/characters/insert/{number}")
-	public void insert(@PathVariable(value = "number") int number) {
+	@GetMapping("/characters/testing")
+	public void insert(@PathVariable(value = "insert") int nInsert) {
 
-		for (int i = 0; i < number; i++) {
+		for (int i = 0; i < nInsert; i++) {
 			Character character = new Character("Character_" + i, "Surname_" + i, "description_" + i);
 			List<Movie> movies = new ArrayList<Movie>();
 			movies.add(new Movie("code_" + i, "Title_" + i, "year_" + 1, "description_" + i));
@@ -80,7 +80,7 @@ public class MainController {
 			repositoryCharacters.save(character);
 		}
 
-		if (number == -1) {
+		if (nInsert == -1) {
 			repositoryCharacters.deleteAll();
 		}
 	}
@@ -135,17 +135,12 @@ public class MainController {
 	@PostMapping("/characters")
 	public ResponseEntity<?> createCharacter(@RequestBody Character character) {
 
-		try {
-			repositoryCharacters.save(new Character(character.getFirstName(), character.getLastName(),
-					character.getDescription(), character.getMovies()));
+		repositoryCharacters.save(new Character(character.getFirstName(), character.getLastName(),
+				character.getDescription(), character.getMovies()));
 
-			HttpHeaders httpHeaders = new HttpHeaders();
-			httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().build().toUri());
-			return new ResponseEntity<>(new SuccessType("character created"), httpHeaders, HttpStatus.CREATED);
-
-		} catch (ConstraintViolationException e) {
-			return new ResponseEntity<>(new ErrorType("id can't be null"), HttpStatus.BAD_REQUEST);
-		}
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().build().toUri());
+		return new ResponseEntity<>(new SuccessType("character created"), httpHeaders, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/characters")

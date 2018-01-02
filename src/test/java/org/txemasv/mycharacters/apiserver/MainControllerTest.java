@@ -1,7 +1,22 @@
 package org.txemasv.mycharacters.apiserver;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+
 import org.hamcrest.core.IsNull;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,20 +30,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import org.txemasv.mycharacters.apiserver.model.CharacterRepository;
 import org.txemasv.mycharacters.apiserver.model.Character;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import org.txemasv.mycharacters.apiserver.model.CharacterRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -49,7 +52,6 @@ public class MainControllerTest {
 	private CharacterRepository characterRepository;
 
 	private Character character;
-	private List<Character> charactersList;
 
 	@Autowired
 	void setConverters(HttpMessageConverter<?>[] converters) {
@@ -107,12 +109,46 @@ public class MainControllerTest {
 	
 	@Test
     public void createCharacter_isCreated() throws Exception {
-        String characterJson = json(new Character("George", "Of the Jungle", "crazy tarzan"));
+		String characterJson = json(new Character("George", "Of the Jungle", "crazy tarzan"));
         
         this.mockMvc.perform(post("/characters")
                 .contentType(contentType)
                 .content(characterJson))
                 .andExpect(status().isCreated());
+    }
+	
+	@Test
+    public void upateCharacter_isUpdated() throws Exception {
+      
+        character.setFields(new Character("George", "Of the Jungle", "crazy tarzan"));
+        String characterJson = json(character);
+        
+        this.mockMvc.perform(put("/characters")
+                .contentType(contentType)
+                .content(characterJson))
+                .andExpect(status().isNoContent());
+    }
+	
+	@Test
+    public void updateCharacter_isNoExistent() throws Exception {
+		character.setId("a-non-existent-id-string");
+		String characterJson = json(character);
+        
+        this.mockMvc.perform(put("/characters")
+                .contentType(contentType)
+                .content(characterJson))
+                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void updateCharacter_idNoSpecify() throws Exception {
+		character.setId(null);
+		String characterJson = json(character);
+        
+        this.mockMvc.perform(put("/characters")
+                .contentType(contentType)
+                .content(characterJson))
+                .andExpect(status().isBadRequest());
     }
 	
 	@Test
@@ -127,6 +163,15 @@ public class MainControllerTest {
         boolean after = this.characterRepository.findOne(character.getId()) != null;
         
         assertTrue(before != after); 
+    }
+	
+	@Test
+    public void deleteCharacter_isNoExistent() throws Exception {
+		character.setId("a-non-existent-id-string");
+        
+        this.mockMvc.perform(delete("/characters/" + character.getId())
+                .contentType(contentType))
+                .andExpect(status().isNotFound());
     }
 
 	protected String json(Object o) throws IOException {
