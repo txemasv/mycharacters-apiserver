@@ -1,11 +1,12 @@
 package org.txemasv.mycharacters.apiserver.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolationException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -70,7 +71,7 @@ public class MainController {
 	}
 
 	@GetMapping("/characters/testing")
-	public void insert(@PathVariable(value = "insert") int nInsert) {
+	public void insert(@RequestParam(value = "insert", defaultValue = "1") int nInsert, HttpServletResponse response) {
 
 		for (int i = 0; i < nInsert; i++) {
 			Character character = new Character("Character_" + i, "Surname_" + i, "description_" + i);
@@ -82,6 +83,12 @@ public class MainController {
 
 		if (nInsert == -1) {
 			repositoryCharacters.deleteAll();
+		}
+		
+		try {
+			response.sendRedirect("/characters");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
