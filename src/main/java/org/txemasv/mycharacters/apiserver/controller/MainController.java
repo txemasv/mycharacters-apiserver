@@ -49,6 +49,7 @@ public class MainController {
 		List<ItemType> items = new ArrayList<ItemType>();
 
 		// GET
+		items.add(new ItemType(null, "/swagger-ui.html", "API documentation and testing", null));
 		items.add(new ItemType("GET", "/characters", "list all characters", "[page, limit]"));
 		items.add(new ItemType("GET", "/characters/:id", "get one character", "[]"));
 		items.add(new ItemType("GET", "/characters/:id/movies", "list all movies from one character", "[]"));
@@ -70,7 +71,7 @@ public class MainController {
 		return new ResponseEntity<>(items, HttpStatus.OK);
 	}
 
-	@GetMapping("/characters/testing")
+	//@GetMapping("/characters/testing")
 	public void insert(@RequestParam(value = "insert", defaultValue = "1") int nInsert, HttpServletResponse response) {
 
 		for (int i = 0; i < nInsert; i++) {
